@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: rabbitmq-producer
+
+  cloud:
+    config:
+      uri: http://localhost:8081
