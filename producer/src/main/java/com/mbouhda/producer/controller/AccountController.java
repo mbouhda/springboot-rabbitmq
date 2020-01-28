@@ -4,6 +4,8 @@ import com.mbouhda.producer.dto.AccountDTO;
 import com.mbouhda.producer.event.AccountEvent;
 import com.mbouhda.producer.model.Account;
 import com.mbouhda.producer.service.AccountService;
+import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +14,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(value = "/api")
 public class AccountController extends AbstractController {
 
-    AccountService accountService;
+    private AccountService accountService;
+    private ModelMapper modelMapper;
 
-    public AccountController(AccountService accountService) {
+    @Autowired
+    public AccountController(AccountService accountService, ModelMapper modelMapper) {
         this.accountService = accountService;
+        this.modelMapper = modelMapper;
     }
 
     @GetMapping("/account")
@@ -27,14 +32,13 @@ public class AccountController extends AbstractController {
     }
 
     @PostMapping("/account")
-    public ResponseEntity<?> createAccount(@RequestBody Account account) {
-        Account account1 = accountService.save(account);
-
-        AccountDTO accountDTO = new AccountDTO(account1.getId(), account1.getAccountNumber(), account1.getAccountName(), account1.getUser());
+    public ResponseEntity<?> createAccount(@RequestBody AccountDTO accountDTO) {
+        Account accountEntity = modelMapper.map(accountDTO, Account.class);
+        Account account1 = accountService.save(accountEntity);
 
         AccountEvent accountEvent = new AccountEvent(this, "AccountCreated", accountDTO);
         eventPublisher.publishEvent(accountEvent);
-        return ResponseEntity.ok().body("New account created with id: {}" +accountDTO.getId());
+        return ResponseEntity.ok().body("New account created with id: " +account1.getId());
     }
 
     @PutMapping("/account")

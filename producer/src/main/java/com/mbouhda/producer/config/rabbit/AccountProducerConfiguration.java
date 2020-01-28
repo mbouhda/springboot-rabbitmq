@@ -1,5 +1,6 @@
-package com.mbouhda.producer.config;
+package com.mbouhda.producer.config.rabbit;
 
+import com.mbouhda.producer.config.property.AccountProperties;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.Queue;
@@ -19,12 +20,12 @@ public class AccountProducerConfiguration {
     private AccountProperties accountProperties;
 
     @Bean
-    public TopicExchange getAccountTopicExchange() {
+    private TopicExchange getAccountTopicExchange() {
         return new TopicExchange(accountProperties.getExchange().getName());
     }
 
     @Bean
-    public Queue getAccountQueue() {
+    private Queue getAccountQueue() {
         return new Queue(accountProperties.getQueue().getName());
     }
 
@@ -39,12 +40,12 @@ public class AccountProducerConfiguration {
     }
 
     @Bean
-    public MappingJackson2MessageConverter consumerMessageConverter() {
+    private MappingJackson2MessageConverter consumerMessageConverter() {
         return new MappingJackson2MessageConverter();
     }
 
     @Bean
-    public DefaultMessageHandlerMethodFactory messageHandlerMethodFactory() {
+    private DefaultMessageHandlerMethodFactory messageHandlerMethodFactory() {
         DefaultMessageHandlerMethodFactory methodFactory = new DefaultMessageHandlerMethodFactory();
         methodFactory.setMessageConverter(consumerMessageConverter());
         return methodFactory;

@@ -7,13 +7,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class AccountServiceImp implements AccountService {
 
     final static Logger logger = LoggerFactory.getLogger(AccountServiceImp.class);
 
-    AccountRepository accountRepository;
+    private AccountRepository accountRepository;
 
     public AccountServiceImp(AccountRepository accountRepository) {
         this.accountRepository = accountRepository;
@@ -30,7 +31,7 @@ public class AccountServiceImp implements AccountService {
     }
 
     @Override
-    public void delete(Long id) {
+    public void delete(int id) {
         accountRepository.deleteById(id);
     }
 

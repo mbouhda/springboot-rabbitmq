@@ -1,4 +1,4 @@
-package com.mbouhda.producer.config;
+package com.mbouhda.producer.config.property;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,25 +11,25 @@ import org.springframework.stereotype.Component;
 @Setter
 public class AccountProperties {
 
-    private Exchange exchange;
-    private Queue queue;
-    private Routing routing;
+    public Exchange exchange;
+    public Queue queue;
+    public Routing routing;
 
     @Getter
     @Setter
     public static class Exchange {
-        private String name;
+        public String name;
     }
 
     @Getter
     @Setter
     public static class Queue {
-        private String name;
+        public String name;
     }
 
     @Getter
     @Setter
     public static class Routing {
-        private String key;
+        public String key;
     }
 }

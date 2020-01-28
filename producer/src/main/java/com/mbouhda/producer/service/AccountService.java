@@ -7,7 +7,7 @@ public interface AccountService {
 
     Account save(Account account);
     void update(Account account);
-    void delete(Long id);
+    void delete(int id);
     Page<Account> getAccountsByPage(Integer pageNumber, Integer pageSize);
 
 }

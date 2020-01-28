@@ -1,6 +1,6 @@
 package com.mbouhda.producer.listeners;
 
-import com.mbouhda.producer.config.AccountProperties;
+import com.mbouhda.producer.config.property.AccountProperties;
 import com.mbouhda.producer.event.AccountEvent;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class AccountEventListener {
 
-    final static Logger log = LoggerFactory.getLogger(AccountEventListener.class);
+    private final static Logger log = LoggerFactory.getLogger(AccountEventListener.class);
 
     private RabbitTemplate rabbitTemplate;
     private AccountProperties accountProperties;
