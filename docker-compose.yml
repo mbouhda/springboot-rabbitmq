@@ -1,15 +1,15 @@
 version: '3.4'
 
 services:
-
   rabbitmq:
     image: rabbitmq:3.8.2-management
     ports:
       - 5672:5672
       - 15672:15672
-    networks:
-      - my-net
 
-networks:
-  my-net:
-    driver: bridge
+  fake-smtp:
+    image: digiplant/fake-smtp
+    ports:
+      - "1025:25"
+    volumes:
+      - ./email:/var/mail

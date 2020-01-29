@@ -1,0 +1,26 @@
+server:
+  port: 8083
+
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8080/eureka
+  instance:
+    instance-id: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+account:
+  queue:
+    name: account-queue
+
+mail:
+  host: localhost
+  port: 25
+  protocol: smtp
+  from: test@test.com

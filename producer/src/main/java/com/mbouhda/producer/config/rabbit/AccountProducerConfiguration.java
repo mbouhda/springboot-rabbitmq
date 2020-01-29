@@ -20,12 +20,12 @@ public class AccountProducerConfiguration {
     private AccountProperties accountProperties;
 
     @Bean
-    private TopicExchange getAccountTopicExchange() {
+    public TopicExchange getAccountTopicExchange() {
         return new TopicExchange(accountProperties.getExchange().getName());
     }
 
     @Bean
-    private Queue getAccountQueue() {
+    public Queue getAccountQueue() {
         return new Queue(accountProperties.getQueue().getName());
     }
 
@@ -40,12 +40,12 @@ public class AccountProducerConfiguration {
     }
 
     @Bean
-    private MappingJackson2MessageConverter consumerMessageConverter() {
+    public MappingJackson2MessageConverter consumerMessageConverter() {
         return new MappingJackson2MessageConverter();
     }
 
     @Bean
-    private DefaultMessageHandlerMethodFactory messageHandlerMethodFactory() {
+    public DefaultMessageHandlerMethodFactory messageHandlerMethodFactory() {
         DefaultMessageHandlerMethodFactory methodFactory = new DefaultMessageHandlerMethodFactory();
         methodFactory.setMessageConverter(consumerMessageConverter());
         return methodFactory;
